@@ -28,38 +28,50 @@ export const TaskModel = () => {
         }
     }, [taskType])
 
+    function validationCheck() {
+        if (new Date(dueDate) < new Date()) {
+            alert("Due date can not be in past.")
+            return false;
+        }
+
+        return true;
+    }
+
     function handleTaskCreation() {
-        const task: TaskType = {
-            id: Date.now().toString(),
-            title,
-            description,
-            status,
-            priority,
-            dueDate,
-            createdAt: new Date().toISOString().split("T")[0]
-        }
+        if (validationCheck()) {
+            const task: TaskType = {
+                id: Date.now().toString(),
+                title,
+                description,
+                status,
+                priority,
+                dueDate,
+                createdAt: new Date().toISOString().split("T")[0]
+            }
 
-        if (createTask) {
-            createTask(task);
+            if (createTask) {
+                createTask(task);
+                closeModel();
+            }
         }
-
-        closeModel();
     }
 
     function handleTaskEdit() {
-        const finalEditedTask: TaskType = {
-            id: taskToBeEdited!.id,
-            title,
-            description,
-            status,
-            priority,
-            dueDate
-        }
+        if (validationCheck()) {
+            const finalEditedTask: TaskType = {
+                id: taskToBeEdited!.id,
+                title,
+                description,
+                status,
+                priority,
+                dueDate
+            }
 
-        if (finalEditedTask) {
-            updatedTask(finalEditedTask);
+            if (finalEditedTask) {
+                updatedTask(finalEditedTask);
+                closeModel();
+            }
         }
-        closeModel();
     }
 
     return (
