@@ -122,6 +122,6 @@ export const TaskBoardLayout = () => {
 
                 {openModel && <TaskModel />}
             </div >
-        </DragDropProvider>
+        </DragDropProvider >
     );
 }

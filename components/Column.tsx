@@ -46,7 +46,7 @@ export const Column = ({ status, title }: ColumnProps) => {
                 <h2 className="text-base lg:text-lg font-semibold text-white">{title}</h2>
 
                 <div className="flex items-center justify-center gap-2">
-                    <div className="relative max-w-md lg:max-w-2xl">
+                    <div className="hidden md:inline relative max-w-md lg:max-w-2xl">
                         <div className="absolute left-3 cursor-pointer top-1/2
             -translate-y-1/2 text-neutral-400 hover:text-white transition-all duration-300">
                             <Search size={14} />
@@ -63,7 +63,7 @@ export const Column = ({ status, title }: ColumnProps) => {
                         />
                     </div>
 
-                    <div className="relative p-1 lg:p-1.5 bg-neutral-900 rounded-sm" onClick={() => setShowFilter(!showFilter)}>
+                    <div className="relative z-50 p-1 lg:p-1.5 bg-neutral-900 rounded-sm" onClick={() => setShowFilter(!showFilter)}>
                         <Filter size={20} />
                         {showFilter && (
                             <div className="absolute right-0 top-8 overflow-hidden bg-neutral-900 border border-neutral-700 rounded-md shadow-lg w-32">
@@ -86,6 +86,23 @@ export const Column = ({ status, title }: ColumnProps) => {
                         )}
                     </div>
                 </div>
+            </div>
+
+            <div className="relative md:hidden w-full">
+                <div className="absolute left-3 cursor-pointer top-1/2
+            -translate-y-1/2 text-neutral-400 hover:text-white transition-all duration-300">
+                    <Search size={18} />
+                </div>
+
+                <input
+                    type="text"
+                    id="search"
+                    value={searchText}
+                    onChange={(e) => setSearchText(e.target.value)}
+                    placeholder="Search by title..."
+                    className="bg-neutral-900 px-3 py-1 pl-10 rounded-sm text-base
+                 text-white w-full focus:outline-none focus:ring-2 focus:ring-blue-500 transition"
+                />
             </div>
 
             <div ref={ref} className="flex flex-col gap-3 flex-1">
