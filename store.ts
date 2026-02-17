@@ -32,8 +32,8 @@ export type TaskType = {
     description: string,
     status: "todo" | "doing" | "done",
     priority: "low" | "medium" | "high",
-    createdAt?: Date,
-    dueDate: Date,
+    createdAt?: string,
+    dueDate: string,
 }
 
 export const useStore = create<stateTypes>((set, get) => ({

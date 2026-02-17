@@ -9,7 +9,7 @@ export const TaskModel = () => {
     const [description, setDescription] = useState<string>("");
     const [status, setStatus] = useState<"todo" | "doing" | "done">("todo");
     const [priority, setPriority] = useState<"low" | "medium" | "high">("high");
-    const [dueDate, setDueDate] = useState<Date>(new Date());
+    const [dueDate, setDueDate] = useState<string>(new Date().toISOString().split("T")[0]);
 
     const createTask = useStore((state) => state.createTask);
     const closeModel = useStore((state) => state.closeTaskModel);
@@ -36,7 +36,7 @@ export const TaskModel = () => {
             status,
             priority,
             dueDate,
-            createdAt: new Date()
+            createdAt: new Date().toISOString().split("T")[0]
         }
 
         if (createTask) {
@@ -135,8 +135,8 @@ export const TaskModel = () => {
                         <input
                             id="dueDate"
                             type="date"
-                            value={dueDate.toISOString().split("T")[0]}
-                            onChange={(e) => setDueDate(new Date(e.target.value))}
+                            value={dueDate}
+                            onChange={(e) => setDueDate(e.target.value)}
                             className="bg-neutral-800 p-2 rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
                         />
                     </div>
