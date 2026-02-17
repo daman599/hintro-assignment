@@ -9,7 +9,7 @@ export const TaskModel = () => {
     const [description, setDescription] = useState<string>("");
     const [status, setStatus] = useState<"todo" | "doing" | "done">("todo");
     const [priority, setPriority] = useState<"low" | "medium" | "high">("high");
-    const [dueDate, setDueDate] = useState<Date>(new Date(Date.now()));
+    const [dueDate, setDueDate] = useState<Date>(new Date());
 
     const createTask = useStore((state) => state.createTask);
     const closeModel = useStore((state) => state.closeTaskModel);
@@ -26,69 +26,40 @@ export const TaskModel = () => {
             setPriority(taskToBeEdited.priority);
             setDueDate(taskToBeEdited.dueDate);
         }
-    }, [])
-
-    function validationCheck() {
-        if (!title.trim()) {
-            alert("Title is required");
-            return false;
-        }
-
-        if (!description) {
-            alert("Description is required");
-            return false;
-        }
-
-        if (!priority) {
-            alert("Priority is required");
-            return false;
-        }
-
-        if (!status) {
-            alert("Status is required");
-            return false;
-        }
-
-        return true;
-    }
+    }, [taskType])
 
     function handleTaskCreation() {
-        if (validationCheck()) {
-
-            const task: TaskType = {
-                id: Date.now().toString(),
-                title,
-                description,
-                status,
-                priority,
-                dueDate,
-                createdAt: new Date()
-            }
-
-            if (createTask) {
-                createTask(task);
-            }
-
-            closeModel();
+        const task: TaskType = {
+            id: Date.now().toString(),
+            title,
+            description,
+            status,
+            priority,
+            dueDate,
+            createdAt: new Date()
         }
+
+        if (createTask) {
+            createTask(task);
+        }
+
+        closeModel();
     }
 
     function handleTaskEdit() {
-        if (validationCheck()) {
-            const finalEditedTask: TaskType = {
-                id: taskToBeEdited!.id,
-                title,
-                description,
-                status,
-                priority,
-                dueDate
-            }
-
-            if (finalEditedTask) {
-                updatedTask(finalEditedTask);
-            }
-            closeModel();
+        const finalEditedTask: TaskType = {
+            id: taskToBeEdited!.id,
+            title,
+            description,
+            status,
+            priority,
+            dueDate
         }
+
+        if (finalEditedTask) {
+            updatedTask(finalEditedTask);
+        }
+        closeModel();
     }
 
     return (

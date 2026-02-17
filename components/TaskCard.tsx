@@ -41,10 +41,10 @@ export const TaskCard = ({ task }: TaskCardProps) => {
                 </div>
             </div>
 
-            {openCard && <div className="flex flex-col items-start px-4 w-full gap-1">
+            {openCard && <div className="flex flex-col items-start px-4 w-full gap-1 font-medium">
                 <p className="text-neutral-400 text-sm md:text-base"> {task.description}</p>
-                <p className="text-neutral-400 text-sm md:text-base">Due Date:{task.dueDate.toLocaleDateString()} </p>
+                <p className="text-neutral-400 text-sm md:text-base "><span className="text-red-400">Due date:</span> {task.dueDate.toLocaleDateString()} </p>
             </div>}
-        </div >
+        </div>
     );
 };
