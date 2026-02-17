@@ -1,7 +1,7 @@
 export const Loader = () => {
     return (
         <div className="flex items-center justify-center min-h-screen bg-neutral-900">
-            <div className="w-12 h-12 border-4 border-neutral-600 border-t-blue-500 rounded-full animate-spin"></div>
+            <div className="size-10 md:size-12 border-4 border-neutral-600 border-t-blue-500 rounded-full animate-spin"></div>
         </div>
     );
 };

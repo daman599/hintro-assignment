@@ -18,6 +18,7 @@ type stateTypes = {
     createTask: (task: TaskType) => void,
     deleteTask: (taskId: string) => void,
     updateTask: (updatedTask: TaskType) => void,
+    moveTask: (taskId: string, newStatus: "todo" | "doing" | "done") => void,
 
     getTasksFromStorage: () => void,
     setTasksInStorage: () => void,
@@ -39,12 +40,12 @@ export const useStore = create<stateTypes>((set, get) => ({
     authState: false,
     login: () => {
         localStorage.setItem("isLoggedIn", "true");
-        set({ authState: true })
+        set({ authState: true });
     },
 
     logout: () => {
         localStorage.removeItem("isLoggedIn");
-        set({ authState: false })
+        set({ authState: false });
     },
 
     isModelOpen: false,
@@ -62,7 +63,7 @@ export const useStore = create<stateTypes>((set, get) => ({
     getTasksFromStorage: () => {
         const tasksPersist = localStorage.getItem("tasks");
         if (!tasksPersist) {
-            set({ tasks: [] })
+            set({ tasks: [] });
         } else {
             const parsedTasks: TaskType[] | [] = JSON.parse(tasksPersist);
             set({ tasks: parsedTasks });
@@ -87,6 +88,11 @@ export const useStore = create<stateTypes>((set, get) => ({
     updateTask: (updatedTask) => {
         set((state) => ({ tasks: state.tasks?.map((task) => (task.id === updatedTask.id ? { ...task, ...updatedTask } : task)) }));
         set({ activityLog: "Task Updated" })
+    },
+
+    moveTask: (taskId, newStatus) => {
+        set((state) => ({ tasks: state.tasks?.map((task) => (task.id === taskId ? { ...task, status: newStatus } : task)) }))
+        set({ activityLog: "Task Moved" })
     },
 
     resetBoard: () => {

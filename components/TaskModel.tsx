@@ -9,7 +9,7 @@ export const TaskModel = () => {
     const [description, setDescription] = useState<string>("");
     const [status, setStatus] = useState<"todo" | "doing" | "done">("todo");
     const [priority, setPriority] = useState<"low" | "medium" | "high">("high");
-    const [dueDate, setDueDate] = useState<Date>(new Date());
+    const [dueDate, setDueDate] = useState<Date>(new Date(Date.now()));
 
     const createTask = useStore((state) => state.createTask);
     const closeModel = useStore((state) => state.closeTaskModel);
@@ -94,8 +94,8 @@ export const TaskModel = () => {
     return (
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 backdrop-blur-sm">
 
-            <div className="bg-neutral-900 text-white rounded-lg p-6 w-lg relative">
-                <h2 className="text-lg font-semibold mb-4">{taskType} Task</h2>
+            <div className="bg-neutral-900 text-white rounded-lg p-4 md:p-6 w-lg relative">
+                <h2 className="text-lg font-semibold mb-4">{taskType.charAt(0).toUpperCase() + taskType.slice(1)} Task</h2>
 
                 {/* form fields */}
                 <form onSubmit={(e) => {
@@ -190,7 +190,7 @@ export const TaskModel = () => {
                         type="submit"
                         className="bg-blue-900 hover:bg-blue-900 text-white py-2 rounded mt-2"
                     >
-                        {taskType} Task
+                        {taskType.charAt(0).toUpperCase() + taskType.slice(1)} Task
                     </button>
                 </form>
 
