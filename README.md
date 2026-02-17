@@ -2,7 +2,26 @@ This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-
 
 ## Getting Started
 
-First, run the development server:
+## Clone the Repository:
+
+```bash
+git clone https://github.com/daman599/hintro-assignment.git
+cd hintro-assignment
+```
+
+## Install Dependencies:
+
+```bash
+npm install
+# or
+yarn install
+# or
+pnpm install
+# or
+bun install
+```
+
+## Run the development server:
 
 ```bash
 npm run dev
