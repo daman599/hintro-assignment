@@ -28,8 +28,10 @@ export const TaskModel = () => {
         }
     }, [taskType])
 
+    const today = new Date().toISOString().split("T")[0];
+
     function validationCheck() {
-        if (new Date(dueDate) < new Date()) {
+        if (dueDate < today) {
             alert("Due date can not be in past.")
             return false;
         }
